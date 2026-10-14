@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b12"><meta name="description" content="IMPOSTEUR — jeu de bluff en ligne de 2 à 8 joueurs, créé par M. Cyrille.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>IMPOSTEUR — by M. Cyrille</title>
+<style>
+:root{color-scheme:dark;--bg:#090b12;--panel:#121622;--panel2:#191f2d;--line:#2a3144;--text:#f4f6fb;--muted:#a6afc2;--red:#ff355e;--gold:#ffc857;--green:#4be0a3;--blue:#65a8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#292039 0,transparent 48%),var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:13px 16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#ff355e,#c30e3e);box-shadow:0 7px 22px #ff355e24;transition:transform .15s,opacity .15s}button:active{transform:scale(.98)}button:disabled{opacity:.4;cursor:not-allowed}.secondary{background:#242b3b;box-shadow:none;border:1px solid var(--line)}.green{background:linear-gradient(135deg,#4be0a3,#138d69);color:#06130f}.gold{background:linear-gradient(135deg,#ffd36c,#ff9b38);color:#241607}.danger{background:#351a27;border:1px solid #733047;box-shadow:none}.wrap{max-width:980px;margin:auto;padding:18px 16px 34px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#ff355e,#7d133e);font-size:25px;box-shadow:0 0 30px #ff355e2b}.brand h1{font-size:clamp(24px,5vw,38px);letter-spacing:3px;margin:0;line-height:1}.brand small{display:block;color:var(--muted);letter-spacing:1.4px;margin-top:7px;font-size:10px;font-weight:900}.pill{border:1px solid var(--line);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:12px;white-space:nowrap}.hero{text-align:center;padding:30px 14px 25px}.eyebrow{color:var(--red);letter-spacing:4px;font-size:11px;font-weight:1000}.hero h2{font-size:clamp(30px,7vw,56px);line-height:1.03;margin:10px 0 12px;letter-spacing:-1.7px}.hero h2 span{color:var(--red)}.hero p{max-width:550px;margin:auto;color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.panel{background:linear-gradient(145deg,#151a27f5,#10131df5);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 16px 45px #0003}.panel h3{margin:0 0 8px;font-size:18px}.panel p,.muted{color:var(--muted)}.field{display:flex;flex-direction:column;gap:7px;margin:14px 0}.field label{font-size:12px;font-weight:800;color:#cbd2e0;letter-spacing:.4px}.field input{width:100%;min-width:0;background:#090d16;border:1px solid #333b50;border-radius:12px;color:white;padding:13px 14px;outline:none}.field input:focus{border-color:var(--red);box-shadow:0 0 0 3px #ff355e22}.wide{width:100%}.stack{display:grid;gap:10px}.tiny{font-size:12px;color:var(--muted)}.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;margin-top:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px currentColor}.dot.ok{background:var(--green)}.hidden{display:none!important}.gamehead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}.roomcode{font-size:28px;font-weight:1000;letter-spacing:7px;color:var(--gold)}.share{display:flex;gap:8px;flex-wrap:wrap}.share button{padding:10px 12px}.players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.player{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#0c1019;min-width:0}.avatar{width:36px;height:36px;border-radius:11px;background:#2a2034;display:grid;place-items:center;font-weight:900;color:#ff9ab0;flex-shrink:0}.player .pname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}.player .sub{font-size:11px;color:var(--muted)}.phase{display:inline-block;background:#321a28;color:#ff8ca5;border:1px solid #693047;padding:6px 10px;border-radius:8px;font-size:11px;letter-spacing:1.2px;font-weight:1000}.rolecard{padding:26px 18px;border-radius:18px;text-align:center;border:1px solid #754059;background:radial-gradient(ellipse at top,#421c32,#171320 70%);margin:16px 0}.rolecard h2{font-size:32px;margin:6px 0}.rolecard .word{font-size:clamp(26px,6vw,42px);font-weight:1000;color:var(--gold);letter-spacing:1px;margin:10px}.rolecard .hint{color:var(--muted)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.actions>*{flex:1;min-width:140px}.voterow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);padding:10px;border-radius:13px;margin-top:8px;background:#0b1019}.voterow button{padding:9px 12px}.resultbig{text-align:center;padding:20px}.resultbig .symbol{font-size:56px}.resultbig h2{font-size:clamp(28px,7vw,42px);margin:6px 0}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#f4f6fb;color:#0b0d13;border-radius:12px;padding:12px 18px;font-weight:800;box-shadow:0 10px 40px #0008;z-index:10;max-width:90%;text-align:center}.footer{text-align:center;color:#737d93;font-size:11px;padding:24px 0 4px}.how{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.step{padding:14px;border-radius:14px;background:#111622;border:1px solid var(--line)}.step b{display:block;color:var(--red);font-size:12px;letter-spacing:1px;margin-bottom:5px}.step span{font-size:12px;color:var(--muted)}.sectiontitle{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.count{color:var(--gold);font-weight:900}.divider{height:1px;background:var(--line);margin:17px 0}
+@media(max-width:650px){.wrap{padding:13px 12px 25px}.top{align-items:flex-start}.pill{font-size:10px}.grid{grid-template-columns:1fr}.hero{padding:24px 5px}.panel{padding:17px}.players{grid-template-columns:1fr 1fr}.how{grid-template-columns:1fr}.step{display:flex;gap:12px;align-items:center}.step b{margin:0;min-width:58px}.roomcode{font-size:25px}.share{width:100%}.share button{flex:1}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo">☠</div><div><h1>IMPOSTEUR</h1><small>BLUFF · DÉDUCTION · TRAHISON</small></div></div><div class="pill">2–8 JOUEURS · EN LIGNE</div></header>
+<section id="home">
+<div class="hero"><div class="eyebrow">UN SEUL MENSONGE PEUT TOUT CHANGER</div><h2>Qui joue double jeu<span> ?</span></h2><p>Une équipe connaît le mot secret. Un imposteur improvise. Discutez, doutez et votez avant qu'il ne soit trop tard.</p></div>
+<div class="grid">
+<div class="panel"><h3>⚔️ Créer une salle</h3><p class="tiny">Tu seras l'hôte. Invite tes amis avec le code privé ou le lien de la salle.</p><div class="field"><label for="hostName">TON PSEUDO</label><input id="hostName" maxlength="18" placeholder="Ex. Cyrille" autocomplete="nickname"></div><button id="createBtn" class="wide">Créer une partie privée</button><div class="status"><span class="dot"></span><span>Connexion en ligne via WebRTC</span></div></div>
+<div class="panel"><h3>🔑 Rejoindre une salle</h3><p class="tiny">Entre le code donné par ton ami ou ouvre directement son lien d'invitation.</p><div class="field"><label for="joinName">TON PSEUDO</label><input id="joinName" maxlength="18" placeholder="Ex. Alex" autocomplete="nickname"></div><div class="field"><label for="joinCode">CODE DE LA SALLE</label><input id="joinCode" maxlength="5" placeholder="ABCDE" autocapitalize="characters" style="text-transform:uppercase;letter-spacing:5px;font-weight:900"></div><button id="joinBtn" class="secondary wide">Rejoindre la partie</button></div>
+</div>
+<div class="how"><div class="step"><b>01 · SECRET</b><span>Regarde ton rôle en privé : équipe ou imposteur.</span></div><div class="step"><b>02 · BLUFF</b><span>Donnez des indices sans révéler le mot. L'imposteur doit se fondre dans le groupe.</span></div><div class="step"><b>03 · VOTE</b><span>Votez pour éliminer le suspect. L'imposteur gagne s'il échappe au vote.</span></div></div>
+</section>
+<section id="room" class="hidden">
+<div class="gamehead"><div><span class="phase" id="phaseTag">LOBBY</span><div class="roomcode" id="roomCodeView">-----</div><div class="tiny">CODE PRIVÉ DE LA SALLE</div></div><div class="share"><button id="copyLinkBtn" class="secondary">↗ Inviter par lien</button><button id="copyCodeBtn" class="secondary">Copier le code</button></div></div>
+<div class="grid">
+<div class="panel"><div class="sectiontitle"><h3>👥 Les joueurs</h3><span class="count" id="playerCount">0/8</span></div><div class="tiny">La partie commence quand tout le monde est prêt.</div><div class="players" id="playersList"></div><div class="divider"></div><div id="lobbyControls" class="stack"><button id="startBtn" class="wide">Lancer la partie</button><div class="tiny" id="startHelp">Minimum 2 joueurs. Garde ton écran ouvert pendant la partie.</div></div><div id="waitHost" class="tiny hidden">L'hôte prépare la partie…</div></div>
+<div class="panel"><div class="sectiontitle"><h3>🎭 Mission</h3><span class="phase" id="roundLabel">MANCHE 1</span></div><div id="gameContent"><p class="muted">En attente du lancement de la partie…</p></div></div>
+</div>
+<div class="footer">Salle privée • Ne ferme pas la page pendant la partie • Les rôles restent secrets jusqu'au résultat.</div>
+</section>
+<div class="footer">Créé avec ambition par <strong style="color:#dbe1ed">M. Cyrille</strong> · CST de Sarh<br>IMPOSTEUR © 2026</div>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+<script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+<script>
+(() => {
+'use strict';
+const $=id=>document.getElementById(id);
+const words=[
+['Animaux','Girafe'],['Animaux','Crocodile'],['Animaux','Dauphin'],['Animaux','Hérisson'],['Animaux','Chauve-souris'],['Animaux','Flamant rose'],
+['Nourriture','Pizza'],['Nourriture','Mangue'],['Nourriture','Pop-corn'],['Nourriture','Chocolat'],['Nourriture','Sushi'],['Nourriture','Pastèque'],
+['Lieux','Aéroport'],['Lieux','Bibliothèque'],['Lieux','Stade'],['Lieux','Hôpital'],['Lieux','Plage'],['Lieux','Université'],
+['Objets','Parapluie'],['Objets','Casque'],['Objets','Batterie'],['Objets','Miroir'],['Objets','Valise'],['Objets','Téléphone'],
+['Métiers','Pilote'],['Métiers','Développeur'],['Métiers','Médecin'],['Métiers','Détective'],['Métiers','Chef cuisinier'],['Métiers','Architecte'],
+['Culture','Afrobeats'],['Culture','Cinéma'],['Culture','Football'],['Culture','Jeux vidéo'],['Culture','Concert'],['Culture','Danse'],
+['Nature','Volcan'],['Nature','Désert'],['Nature','Cascade'],['Nature','Orage'],['Nature','Arc-en-ciel'],['Nature','Montagne'],
+['Technologie','Robot'],['Technologie','Intelligence artificielle'],['Technologie','Drone'],['Technologie','Satellite'],['Technologie','Réalité virtuelle'],['Technologie','Ordinateur']
+];
+const state={peer:null,host:false,code:'',selfId:'',selfName:'',connections:new Map(),players:[],phase:'lobby',round:1,category:'',votes:{},ready:[],secretWord:'',impostorId:'',role:null,showRole:false,joined:false,roomUrl:''};
+let toastTimer;
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add('hidden'),3200)}
+function setStatus(msg,ok=false){const el=document.querySelector('.status');if(el){el.innerHTML='<span class="dot '+(ok?'ok':'')+'"></span><span>'+escapeHtml(msg)+'</span>'}}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function randomCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<5;i++)s+=chars[Math.floor(Math.random()*chars.length)];return s}
+function hostPeerId(code){return 'imposteur-'+code.toLowerCase()}
+function peerOptions(){return {debug:1,config:{iceServers:[{urls:'stun:stun.l.google.com:19302'}]}}}
+function resetState(){state.connections.forEach(c=>{try{c.close()}catch{}});state.connections.clear();if(state.peer){try{state.peer.destroy()}catch{}}state.peer=null;state.host=false;state.code='';state.selfId='';state.players=[];state.phase='lobby';state.round=1;state.category='';state.votes={};state.ready=[];state.secretWord='';state.impostorId='';state.role=null;state.showRole=false;state.joined=false}
+function openRoomUI(){ $('home').classList.add('hidden');$('room').classList.remove('hidden');$('roomCodeView').textContent=state.code;$('roundLabel').textContent='MANCHE '+state.round;render()}
+function goHome(){resetState();$('room').classList.add('hidden');$('home').classList.remove('hidden')}
+function makePlayer(id,name,isHost=false){return {id,name,isHost,connected:true}}
+function pubState(){return {type:'state',code:state.code,players:state.players.map(p=>({id:p.id,name:p.name,isHost:p.isHost,connected:p.connected!==false})),phase:state.phase,round:state.round,category:state.category,ready:[...state.ready],votes:state.phase==='result'?state.votes:{},impostorId:state.phase==='result'?state.impostorId:'',secretWord:state.phase==='result'?state.secretWord:'',hostId:state.selfId}}
+function sendTo(conn,msg){try{if(conn&&conn.open)conn.send(msg)}catch(e){console.warn(e)}}
+function broadcast(msg){state.connections.forEach(c=>sendTo(c,msg))}
+function broadcastState(){const s=pubState();broadcast(s);render()}
+function sendRoleTo(conn,id){if(state.role&&id===state.selfId)return;const isImp=id===state.impostorId;const p=state.players.find(x=>x.id===id);if(p)sendTo(conn,{type:'role',role:isImp?'imposteur':'équipe',word:isImp?'':state.secretWord,category:state.category,round:state.round})}
+function sendPrivateRoles(){for(const [id,c] of state.connections)sendRoleTo(c,id)}
+function handleIncoming(conn){
+ conn.on('open',()=>{});
+ conn.on('data',msg=>{if(!msg||typeof msg!=='object')return;
+  if(!state.host){handleClientMessage(msg);return}
+  if(msg.type==='hello'){
+   if(state.players.some(p=>p.id===conn.peer))return;
+   if(state.players.length>=8){sendTo(conn,{type:'error',message:'Cette salle est complète (8 joueurs).'});conn.close();return}
+   const name=String(msg.name||'Joueur').trim().slice(0,18)||'Joueur';
+   state.connections.set(conn.peer,conn);state.players.push(makePlayer(conn.peer,name,false));
+   sendTo(conn,{type:'welcome',selfId:conn.peer,code:state.code,hostId:state.selfId});
+   sendTo(conn,pubState());if(state.phase==='role'||state.phase==='discuss'||state.phase==='vote'){sendTo(conn,{type:'error',message:'La partie a déjà commencé. Rejoins la prochaine manche.'});return}
+   broadcastState();toast(name+' a rejoint la salle');
+  }else if(msg.type==='ready'){if(state.phase==='role'&&!state.ready.includes(conn.peer)){state.ready.push(conn.peer);if(state.ready.length>=state.players.length)beginDiscussion();else broadcastState()}}
+  else if(msg.type==='vote'){acceptVote(conn.peer,msg.target)}
+  else if(msg.type==='leave'){removePlayer(conn.peer)}
+ });
+ conn.on('close',()=>{if(state.host&&state.connections.has(conn.peer))removePlayer(conn.peer)});
+ conn.on('error',e=>console.warn('connection error',e));
+}
+function removePlayer(id){if(!state.host)return;state.connections.delete(id);state.players=state.players.filter(p=>p.id!==id);state.ready=state.ready.filter(x=>x!==id);delete state.votes[id];Object.keys(state.votes).forEach(voter=>{if(state.votes[voter]===id)delete state.votes[voter]});broadcastState()}
+function handleClientMessage(msg){
+ if(msg.type==='welcome'){state.selfId=msg.selfId;state.code=msg.code;$('roomCodeView').textContent=state.code}
+ if(msg.type==='state'){state.players=msg.players||[];state.phase=msg.phase||'lobby';state.round=msg.round||1;state.category=msg.category||'';state.ready=msg.ready||[];state.votes=msg.votes||{};if(msg.phase==='result'){state.impostorId=msg.impostorId;state.secretWord=msg.secretWord}openRoomUI()}
+ if(msg.type==='role'){state.role=msg.role;state.secretWord=msg.word;state.category=msg.category;state.round=msg.round;state.showRole=false;render()}
+ if(msg.type==='error'){toast(msg.message||'Une erreur est survenue.')}
+}
+function connectConn(conn){handleIncoming(conn);conn.on('open',()=>sendTo(conn,{type:'hello',name:state.selfName}));}
+async function createRoom(){
+ if(!window.Peer){toast('Le module de connexion ne charge pas. Vérifie Internet puis recharge.');return}
+ const name=$('hostName').value.trim().slice(0,18);if(!name){toast('Entre ton pseudo avant de créer la salle.');$('hostName').focus();return}
+ $('createBtn').disabled=true;setStatus('Création de la salle…');
+ const code=randomCode();state.code=code;state.host=true;state.selfName=name;state.roomUrl=location.origin+location.pathname+'?join='+code;
+ try{
+  const peer=new Peer(hostPeerId(code),peerOptions());state.peer=peer;
+  peer.on('open',id=>{state.selfId=id;state.players=[makePlayer(id,name,true)];state.joined=true;openRoomUI();setStatus('Salle en ligne · invite tes amis',true);toast('Salle créée ! Partage le code '+code)});
+  peer.on('connection',conn=>{if(state.phase!=='lobby'){sendTo(conn,{type:'error',message:'La partie est déjà commencée.'});return}connectConn(conn)});
+  peer.on('error',err=>{console.error(err);if(err.type==='unavailable-id'){toast('Ce code est déjà utilisé. Réessaie.');goHome()}else toast('Connexion impossible ('+(err.type||'réseau')+'). Réessaie.');$('createBtn').disabled=false;setStatus('Connexion non établie')});
+ }catch(e){console.error(e);toast('Impossible de créer la salle. Réessaie.')}
+ finally{setTimeout(()=>$('createBtn').disabled=false,1200)}
+}
+function joinRoom(){
+ if(!window.Peer){toast('Le module de connexion ne charge pas. Vérifie Internet puis recharge.');return}
+ const name=$('joinName').value.trim().slice(0,18);const code=$('joinCode').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,5);
+ if(!name){toast('Entre ton pseudo.');return}if(code.length!==5){toast('Le code doit contenir 5 caractères.');return}
+ $('joinBtn').disabled=true;state.host=false;state.code=code;state.selfName=name;state.roomUrl=location.origin+location.pathname+'?join='+code;
+ try{
+  const peer=new Peer(undefined,peerOptions());state.peer=peer;
+  peer.on('open',()=>{const conn=peer.connect(hostPeerId(code),{reliable:true,metadata:{name}});state.hostConn=conn;connectConn(conn);conn.on('open',()=>{state.joined=true;openRoomUI();toast('Connexion à la salle…')});conn.on('error',()=>toast('Impossible de rejoindre. Vérifie le code et réessaie.'))});
+  peer.on('error',err=>{console.error(err);if(err.type==='peer-unavailable')toast('Salle introuvable. Demande à l’hôte de recréer la salle.');else toast('Erreur réseau : '+(err.type||'réessaie'));$('joinBtn').disabled=false});
+ }catch(e){console.error(e);toast('Impossible de se connecter.')}
+ setTimeout(()=>$('joinBtn').disabled=false,2500);
+}
+function startGame(){
+ if(!state.host)return;if(state.players.length<2){toast('Il faut au moins 2 joueurs.');return}
+ const pick=words[Math.floor(Math.random()*words.length)];state.category=pick[0];state.secretWord=pick[1];state.impostorId=state.players[Math.floor(Math.random()*state.players.length)].id;state.role=state.selfId===state.impostorId?'imposteur':'équipe';state.showRole=false;state.phase='role';state.votes={};state.ready=[];sendPrivateRoles();broadcastState();render()
+}
+function beginDiscussion(){state.phase='discuss';state.ready=[];broadcastState();toast('Discussion ouverte ! Bluffez sans dire le mot.')}
+function beginVote(){if(!state.host)return;state.phase='vote';state.votes={};broadcastState();toast('Vote ouvert : choisissez votre suspect.')}
+function acceptVote(voter,target){
+ if(state.phase!=='vote'||!state.players.some(p=>p.id===voter)||!state.players.some(p=>p.id===target)||voter===target)return;
+ state.votes[voter]=target;
+ const alive=state.players.filter(p=>p.connected!==false);
+ if(alive.every(p=>state.votes[p.id]))finishRound();else broadcastState()
+}
+function castVote(target){
+ if(state.phase!=='vote'||target===state.selfId)return;
+ if(state.host)acceptVote(state.selfId,target);else sendTo(state.hostConn,{type:'vote',target});
+ toast('Vote enregistré.');render()
+}
+function finishRound(){state.phase='result';broadcastState();render()}
+function nextRound(){
+ if(!state.host)return;state.round++;state.phase='lobby';state.role=null;state.showRole=false;state.secretWord='';state.impostorId='';state.category='';state.votes={};state.ready=[];broadcastState();sendPrivateRoles();render()
+}
+function readyForDiscussion(){if(state.host){if(state.phase==='role')beginDiscussion()}else sendTo(state.hostConn,{type:'ready'});state.ready.push(state.selfId);render()}
+function copyText(text,label){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>toast(label+' copié !')).catch(()=>fallbackCopy(text,label))}else fallbackCopy(text,label)}
+function fallbackCopy(text,label){const input=document.createElement('textarea');input.value=text;document.body.appendChild(input);input.select();try{document.execCommand('copy');toast(label+' copié !')}catch{toast(text)}input.remove()}
+function render(){
+ if(!$('room')||$('room').classList.contains('hidden'))return;
+ $('roomCodeView').textContent=state.code||'-----';$('playerCount').textContent=state.players.length+'/8';$('roundLabel').textContent='MANCHE '+state.round;
+ const labels={lobby:'SALLE D’ATTENTE',role:'RÔLE SECRET',discuss:'DISCUSSION',vote:'VOTE EN COURS',result:'RÉSULTAT'};$('phaseTag').textContent=labels[state.phase]||'EN LIGNE';
+ $('playersList').innerHTML=state.players.map((p,i)=>'<div class="player"><div class="avatar">'+escapeHtml((p.name||'?').slice(0,1).toUpperCase())+'</div><div style="min-width:0"><div class="pname">'+escapeHtml(p.name)+(p.id===state.selfId?' <span style="color:#ffc857">(toi)</span>':'')+'</div><div class="sub">'+(p.isHost?'Hôte de la salle':'Joueur')+(p.connected===false?' · déconnecté':'')+'</div></div></div>').join('');
+ $('lobbyControls').classList.toggle('hidden',state.phase!=='lobby'||!state.host);$('waitHost').classList.toggle('hidden',state.phase!=='lobby'||state.host);
+ $('startBtn').disabled=state.players.length<2;$('startHelp').textContent=state.players.length<2?'Invite au moins un autre joueur.':state.players.length+'/8 joueurs connectés. À 2 joueurs, le bluff est plus difficile à équilibrer.';
+ const c=$('gameContent');
+ if(state.phase==='lobby'){c.innerHTML='<p class="muted">Quand tout le monde est là, l’hôte lance la manche. Un mot secret est donné à l’équipe, mais pas à l’imposteur.</p><div class="rolecard"><div style="font-size:35px">🕵️</div><h2>Prêt à bluffer ?</h2><p class="hint">Ne partage jamais ton écran de rôle.</p></div>';return}
+ if(state.phase==='role'){
+  const isImp=state.role==='imposteur';const ready=state.ready.includes(state.selfId);
+  c.innerHTML='<div class="rolecard"><div class="eyebrow">TON RÔLE · GARDE-LE SECRET</div><div style="font-size:38px;margin:10px">🔒</div><h2>'+ (state.showRole?(isImp?'TU ES L’IMPOSTEUR':'TU ES DANS L’ÉQUIPE'):'Carte confidentielle')+'</h2>'+(state.showRole?'<div class="word">'+(isImp?'IMPOSTEUR':escapeHtml(state.secretWord||'Mot secret'))+'</div><p class="hint">'+(isImp?'Tu ne connais pas le mot. Écoute les indices et fais semblant de savoir.':'Catégorie : '+escapeHtml(state.category)+'. Fais deviner le mot avec des indices subtils.')+'</p>':'<p class="hint">Appuie pour découvrir ton rôle. Cache ton écran aux autres !</p>')+'</div><div class="actions">'+(state.showRole?'<button id="readyBtn" class="green" '+(ready?'disabled':'')+'>'+(ready?'✓ Prêt pour la discussion':'J’ai mémorisé mon rôle')+'</button>':'<button id="revealBtn" class="gold">👁 Révéler mon rôle</button>')+(state.host?'<button id="forceDiscussBtn" class="secondary">Lancer la discussion</button>':'')+'</div><p class="tiny" style="margin-top:12px">Prêts : '+state.ready.length+'/'+state.players.length+'</p>';
+  $('revealBtn')?.addEventListener('click',()=>{state.showRole=true;render()});$('readyBtn')?.addEventListener('click',readyForDiscussion);$('forceDiscussBtn')?.addEventListener('click',beginDiscussion);return
+ }
+ if(state.phase==='discuss'){
+  c.innerHTML='<div class="rolecard"><div style="font-size:38px">💬</div><h2>Discussion ouverte</h2><div class="word" style="font-size:25px">'+escapeHtml(state.category)+'</div><p class="hint">Chacun donne un indice à tour de rôle. Ne prononcez pas directement le mot. L’imposteur doit improviser sans se faire repérer.</p></div>'+(state.role==='imposteur'?'<p style="color:#ff8ca5;font-weight:800">⚠ Tu es l’imposteur. Écoute attentivement et adapte tes réponses.</p>':'<p class="tiny">Ton mot reste privé. Donne un indice qui aide ton équipe sans trop en révéler.</p>')+(state.host?'<button id="voteStartBtn" class="wide">⚖️ Ouvrir le vote</button>':'<p class="tiny">L’hôte ouvrira le vote quand le débat sera terminé.</p>');
+  $('voteStartBtn')?.addEventListener('click',beginVote);return
+ }
+ if(state.phase==='vote'){
+  const already=!!state.votes[state.selfId];
+  c.innerHTML='<div class="rolecard"><div style="font-size:36px">⚖️</div><h2>Qui est l’imposteur ?</h2><p class="hint">Élimine le joueur que tu soupçonnes. Ton vote est secret jusqu’au résultat.</p></div><div id="voteList">'+state.players.filter(p=>p.id!==state.selfId).map(p=>'<div class="voterow"><div style="font-weight:800">'+escapeHtml(p.name)+'</div><button class="voteBtn '+(already?'secondary':'')+'" data-id="'+escapeHtml(p.id)+'" '+(already?'disabled':'')+'>'+(already?'Vote envoyé':'Voter')+'</button></div>').join('')+'</div><p class="tiny" style="margin-top:12px">Votes reçus : '+Object.keys(state.votes).length+'/'+state.players.length+'</p>';
+  c.querySelectorAll('.voteBtn').forEach(b=>b.addEventListener('click',()=>castVote(b.dataset.id)));return
+ }
+ if(state.phase==='result'){
+  const imp=state.players.find(p=>p.id===state.impostorId);const tally={};Object.values(state.votes).forEach(id=>tally[id]=(tally[id]||0)+1);const sorted=Object.entries(tally).sort((a,b)=>b[1]-a[1]);const caught=sorted.length&&sorted[0][0]===state.impostorId;
+  c.innerHTML='<div class="resultbig"><div class="symbol">'+(caught?'🏆':'💀')+'</div><div class="eyebrow">FIN DE MANCHE</div><h2>'+(caught?'IMPOSTEUR DÉMASQUÉ':'L’IMPOSTEUR S’ÉCHAPPE')+'</h2><p class="muted">'+(caught?'Bonne déduction, équipe !':'Le groupe a été dupé. La prochaine manche sera la bonne.')+'</p><div class="divider"></div><p class="tiny">LE MOT SECRET</p><div class="word">'+escapeHtml(state.secretWord)+'</div><p>Imposteur : <strong>'+escapeHtml(imp?.name||'Inconnu')+'</strong></p><div class="divider"></div><h3>Résultat des votes</h3>'+state.players.map(p=>'<div class="voterow"><span>'+escapeHtml(p.name)+(p.id===state.impostorId?' · 🕵️':'')+'</span><strong>'+ (tally[p.id]||0)+' vote(s)</strong></div>').join('')+(state.host?'<button id="nextRoundBtn" class="wide" style="margin-top:16px">↻ Manche suivante</button>':'<p class="tiny">L’hôte peut lancer une nouvelle manche.</p>')+'</div>';
+  $('nextRoundBtn')?.addEventListener('click',nextRound);return
+ }
+}
+$('createBtn').addEventListener('click',createRoom);$('joinBtn').addEventListener('click',joinRoom);$('copyCodeBtn').addEventListener('click',()=>copyText(state.code,'Code'));$('copyLinkBtn').addEventListener('click',()=>copyText(state.roomUrl||location.origin+location.pathname+'?join='+state.code,'Lien d’invitation'));$('startBtn').addEventListener('click',startGame);
+$('joinCode').addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,5)});
+window.addEventListener('beforeunload',()=>{if(state.host&&state.peer)state.peer.destroy();else if(state.hostConn)sendTo(state.hostConn,{type:'leave'})});
+const params=new URLSearchParams(location.search);const invite=params.get('join');if(invite){$('joinCode').value=invite.toUpperCase().slice(0,5);$('joinName').focus()}
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+})();
+</script>
+</body></html>
