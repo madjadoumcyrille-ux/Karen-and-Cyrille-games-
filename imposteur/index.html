@@ -60,7 +60,7 @@ function resetState(){state.connections.forEach(c=>{try{c.close()}catch{}});stat
 function openRoomUI(){ $('home').classList.add('hidden');$('room').classList.remove('hidden');$('roomCodeView').textContent=state.code;$('roundLabel').textContent='MANCHE '+state.round;render()}
 function goHome(){resetState();$('room').classList.add('hidden');$('home').classList.remove('hidden')}
 function makePlayer(id,name,isHost=false){return {id,name,isHost,connected:true}}
-function pubState(){return {type:'state',code:state.code,players:state.players.map(p=>({id:p.id,name:p.name,isHost:p.isHost,connected:p.connected!==false})),phase:state.phase,round:state.round,category:state.category,ready:[...state.ready],votes:state.phase==='result'?state.votes:{},impostorId:state.phase==='result'?state.impostorId:'',secretWord:state.phase==='result'?state.secretWord:'',hostId:state.selfId}}
+function pubState(){return {type:'state',code:state.code,players:state.players.map(p=>({id:p.id,name:p.name,isHost:p.isHost,connected:p.connected!==false})),phase:state.phase,round:state.round,category:state.category,ready:[...state.ready],votedCount:Object.keys(state.votes).length,votes:state.phase==='result'?state.votes:{},impostorId:state.phase==='result'?state.impostorId:'',secretWord:state.phase==='result'?state.secretWord:'',hostId:state.selfId}}
 function sendTo(conn,msg){try{if(conn&&conn.open)conn.send(msg)}catch(e){console.warn(e)}}
 function broadcast(msg){state.connections.forEach(c=>sendTo(c,msg))}
 function broadcastState(){const s=pubState();broadcast(s);render()}
@@ -88,7 +88,7 @@ function handleIncoming(conn){
 function removePlayer(id){if(!state.host)return;state.connections.delete(id);state.players=state.players.filter(p=>p.id!==id);state.ready=state.ready.filter(x=>x!==id);delete state.votes[id];Object.keys(state.votes).forEach(voter=>{if(state.votes[voter]===id)delete state.votes[voter]});broadcastState()}
 function handleClientMessage(msg){
  if(msg.type==='welcome'){state.selfId=msg.selfId;state.code=msg.code;$('roomCodeView').textContent=state.code}
- if(msg.type==='state'){state.players=msg.players||[];state.phase=msg.phase||'lobby';state.round=msg.round||1;state.category=msg.category||'';state.ready=msg.ready||[];state.votes=msg.votes||{};if(msg.phase==='result'){state.impostorId=msg.impostorId;state.secretWord=msg.secretWord}openRoomUI()}
+ if(msg.type==='state'){state.players=msg.players||[];state.phase=msg.phase||'lobby';state.round=msg.round||1;state.category=msg.category||'';state.ready=msg.ready||[];state.votedCount=msg.votedCount||0;state.votes=msg.votes||{};if(msg.phase==='result'){state.impostorId=msg.impostorId;state.secretWord=msg.secretWord}openRoomUI()}
  if(msg.type==='role'){state.role=msg.role;state.secretWord=msg.word;state.category=msg.category;state.round=msg.round;state.showRole=false;render()}
  if(msg.type==='error'){toast(msg.message||'Une erreur est survenue.')}
 }
@@ -139,7 +139,7 @@ function finishRound(){state.phase='result';broadcastState();render()}
 function nextRound(){
  if(!state.host)return;state.round++;state.phase='lobby';state.role=null;state.showRole=false;state.secretWord='';state.impostorId='';state.category='';state.votes={};state.ready=[];broadcastState();sendPrivateRoles();render()
 }
-function readyForDiscussion(){if(state.host){if(state.phase==='role')beginDiscussion()}else sendTo(state.hostConn,{type:'ready'});state.ready.push(state.selfId);render()}
+function readyForDiscussion(){if(state.phase!=='role'||state.ready.includes(state.selfId))return;if(state.host){state.ready.push(state.selfId);if(state.ready.length>=state.players.length)beginDiscussion();else broadcastState()}else{state.ready.push(state.selfId);sendTo(state.hostConn,{type:'ready'});render()}}
 function copyText(text,label){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(()=>toast(label+' copié !')).catch(()=>fallbackCopy(text,label))}else fallbackCopy(text,label)}
 function fallbackCopy(text,label){const input=document.createElement('textarea');input.value=text;document.body.appendChild(input);input.select();try{document.execCommand('copy');toast(label+' copié !')}catch{toast(text)}input.remove()}
 function render(){
@@ -162,7 +162,7 @@ function render(){
  }
  if(state.phase==='vote'){
   const already=!!state.votes[state.selfId];
-  c.innerHTML='<div class="rolecard"><div style="font-size:36px">⚖️</div><h2>Qui est l’imposteur ?</h2><p class="hint">Élimine le joueur que tu soupçonnes. Ton vote est secret jusqu’au résultat.</p></div><div id="voteList">'+state.players.filter(p=>p.id!==state.selfId).map(p=>'<div class="voterow"><div style="font-weight:800">'+escapeHtml(p.name)+'</div><button class="voteBtn '+(already?'secondary':'')+'" data-id="'+escapeHtml(p.id)+'" '+(already?'disabled':'')+'>'+(already?'Vote envoyé':'Voter')+'</button></div>').join('')+'</div><p class="tiny" style="margin-top:12px">Votes reçus : '+Object.keys(state.votes).length+'/'+state.players.length+'</p>';
+  c.innerHTML='<div class="rolecard"><div style="font-size:36px">⚖️</div><h2>Qui est l’imposteur ?</h2><p class="hint">Élimine le joueur que tu soupçonnes. Ton vote est secret jusqu’au résultat.</p></div><div id="voteList">'+state.players.filter(p=>p.id!==state.selfId).map(p=>'<div class="voterow"><div style="font-weight:800">'+escapeHtml(p.name)+'</div><button class="voteBtn '+(already?'secondary':'')+'" data-id="'+escapeHtml(p.id)+'" '+(already?'disabled':'')+'>'+(already?'Vote envoyé':'Voter')+'</button></div>').join('')+'</div><p class="tiny" style="margin-top:12px">Votes reçus : '+(state.host?Object.keys(state.votes).length:(state.votedCount||0))+'/'+state.players.length+'</p>';
   c.querySelectorAll('.voteBtn').forEach(b=>b.addEventListener('click',()=>castVote(b.dataset.id)));return
  }
  if(state.phase==='result'){
