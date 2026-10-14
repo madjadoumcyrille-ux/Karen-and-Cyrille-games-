@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#080b12"><title>Cyrille Boxing Arena 3D</title>
+<meta name="theme-color" content="#080b12"><meta name="description" content="Cyrille Boxing Arena 3D — jeu de boxe mobile"><link rel="manifest" href="./manifest.webmanifest"><title>Cyrille Boxing Arena 3D</title>
 <style>
 :root{--bg:#080b12;--panel:#111827;--gold:#ffca55;--red:#ff4d5e;--blue:#4cc9f0;--muted:#9aa8bc}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:#f8fafc;font-family:Inter,system-ui,Arial}button,input{font:inherit}button{cursor:pointer;border:0;font-weight:900;letter-spacing:.04em;border-radius:12px;padding:13px 16px;color:#08101a;background:var(--gold);box-shadow:0 4px 0 #9a6b13;transition:transform .08s}button:active{transform:translateY(3px);box-shadow:none}.hidden{display:none!important}
@@ -52,6 +52,7 @@ function wireConn(){if(!conn)return;conn.on('open',()=>{if(!isHost){conn.send({t
 $('soloBtn').onclick=()=>{init3D();startGame('solo')};$('onlineBtn').onclick=()=>{$('onlinePanel').classList.toggle('hidden');$('howPanel').classList.add('hidden')};$('howBtn').onclick=()=>{$('howPanel').classList.toggle('hidden');$('onlinePanel').classList.add('hidden')};$('hostBtn').onclick=()=>{isHost=true;init3D();setupPeer()};$('joinBtn').onclick=()=>{isHost=false;init3D();setupPeer()};$('againBtn').onclick=()=>{if(mode==='online'){showNotice('Pour un nouveau duel, recrée une salle.');backHome()}else startGame('solo')};$('homeBtn').onclick=backHome;
 $('leftBtn').onpointerdown=e=>{e.preventDefault();moveDir=-1};$('rightBtn').onpointerdown=e=>{e.preventDefault();moveDir=1};['leftBtn','rightBtn'].forEach(id=>$(id).onpointerup=$(id).onpointercancel=()=>moveDir=0);$('jabBtn').onclick=()=>strike('jab');$('hookBtn').onclick=()=>strike('hook');$('guardBtn').onpointerdown=()=>guarding=true;$('guardBtn').onpointerup=$('guardBtn').onpointercancel=()=>guarding=false;$('dodgeBtn').onpointerdown=()=>{dodging=true;setTimeout(()=>dodging=false,320)};
 document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')moveDir=-1;if(e.key==='ArrowRight'||e.key==='d')moveDir=1;if(e.key==='j')strike('jab');if(e.key==='k')strike('hook');if(e.key===' ')guarding=true});document.addEventListener('keyup',e=>{if(['ArrowLeft','ArrowRight','a','d'].includes(e.key))moveDir=0;if(e.key===' ')guarding=false});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 init3D();
 })();
 </script></body></html>
