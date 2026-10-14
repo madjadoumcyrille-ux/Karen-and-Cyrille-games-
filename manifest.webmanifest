@@ -1,0 +1,15 @@
+{
+  "name": "Cyrille Boxing Arena 3D",
+  "short_name": "Cyrille Boxing",
+  "description": "Jeu de boxe 3D mobile créé par M. Cyrille.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#080b12",
+  "theme_color": "#080b12",
+  "categories": [
+    "games",
+    "sports"
+  ]
+}
